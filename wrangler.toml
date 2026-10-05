@@ -1,0 +1,16 @@
+name = "aion2-timer-bot"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["* * * * *"]
+
+# Create with: npx wrangler d1 create aion-timers — then paste the id below.
+[[d1_databases]]
+binding = "DB"
+database_name = "aion-timers"
+database_id = "f0b39dc8-adbb-4bfb-8546-1555f36fa0d4"
+
+# DISCORD_TOKEN and DISCORD_PUBLIC_KEY are secrets: npx wrangler secret put <NAME>
+[vars]
+DISCORD_APPLICATION_ID = "1556574322179706950"

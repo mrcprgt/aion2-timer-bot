@@ -1,0 +1,26 @@
+{
+  "name": "aion2-timer-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "deploy": "wrangler deploy",
+    "register": "tsx --env-file=.dev.vars scripts/register.ts",
+    "db:init": "wrangler d1 execute aion-timers --remote --file schema.sql",
+    "db:init:local": "wrangler d1 execute aion-timers --local --file schema.sql",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "discord-interactions": "^4.4.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261005.1",
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3",
+    "wrangler": "^4.147.0"
+  }
+}
