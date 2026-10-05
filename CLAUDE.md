@@ -9,7 +9,7 @@ Discord bot posting AION 2 event timers for the Global **Japan** server, display
 - `npm run typecheck`
 - `npm run dev` — local worker with `--test-scheduled`; trigger the cron with `curl "http://localhost:8787/__scheduled?cron=*+*+*+*+*"`
 - `npm run db:init:local` / `npm run db:init` — apply `schema.sql` to local / remote D1
-- `npm run deploy`
+- `npm run deploy` (manual). Pushes to `main` auto-deploy via `.github/workflows/deploy.yml` (typecheck + tests first; `*.md`-only pushes are skipped). Needs repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
 - `npm run register` — PUT slash command definitions to Discord (reads `.dev.vars`). Re-run after changing `COMMANDS`.
 
 ## Architecture

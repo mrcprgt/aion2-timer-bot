@@ -72,4 +72,11 @@ curl "http://localhost:8787/__scheduled?cron=*+*+*+*+*"   # trigger the alert cr
 npx wrangler tail      # stream production logs
 ```
 
-After changing the command definitions in `src/commands.ts`, run `npm run deploy` and then `npm run register`.
+After changing the command definitions in `src/commands.ts`, run `npm run register` once the new code is deployed.
+
+### Auto-deploy
+
+Every push to `main` runs the typecheck and tests, then deploys to Cloudflare ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). Pushes that only change Markdown files are skipped. Forks need two repository secrets:
+
+- `CLOUDFLARE_ACCOUNT_ID`: shown by `npx wrangler whoami`.
+- `CLOUDFLARE_API_TOKEN`: Cloudflare dashboard → My Profile → API Tokens → **Create Token** → template *Edit Cloudflare Workers*.
