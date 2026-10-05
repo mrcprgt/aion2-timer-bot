@@ -24,7 +24,7 @@ Discord bot posting AION 2 event timers for the Global **Japan** server, display
 - **Interactions over HTTP**: Discord POSTs slash commands to the worker's `fetch` (`src/index.ts`), which verifies the Ed25519 signature and must reply synchronously within 3s. Command definitions and handlers live together in `src/commands.ts`.
 - **Alerts via cron**: a `* * * * *` Cron Trigger calls `sendAlerts`, which, for each row in D1 `guild_config`, finds occurrences starting in `[minute + lead, minute + lead + 1min)` and posts via REST (`src/discord.ts`). Exactly-once relies on the cron firing once per minute — there's no dedup table.
 - **Schedule** (`src/schedule.ts`): all event data is declarative (`EVENTS` with daily/hourly/weekly rules in *JP server time*, UTC+9 via `SERVER_TZ_OFFSET_MIN`). Source: gamers4.life/aion-2/database/en/events (Japan region). Everything is computed as UTC epoch ms. Events with `optIn: true` (Festival, Invasion, Watcher Kaira, Arena) are always listed in `/timers` but only alerted when a guild sets `include_frequent`.
-- **Display** (`phTime` in `src/discord.ts`): all times are plain-text Philippine time (UTC+8, "PHT"), deliberately *not* Discord `<t:…>` timestamps (user's choice). Tests pin both offsets.
+- **Display** (`src/discord.ts`): clock times are plain-text Philippine time via `phTime` (UTC+8, "PHT"), deliberately *not* Discord's timezone-converting `<t:…:t>` (user's choice). Each time is followed by `countdown()` — a `<t:…:R>` relative timestamp that Discord clients redraw live — formatted as `20:00 PHT · in 7 minutes`. Never compute "in N min" as static text; it freezes after posting. Tests pin both offsets.
 - The README's schedule table is written in PHT by hand — update it whenever `EVENTS` changes.
 
 ## Constraints

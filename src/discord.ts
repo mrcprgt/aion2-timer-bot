@@ -25,6 +25,12 @@ export const DISPLAY_TZ_LABEL = "PHT";
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 /**
+ * Live countdown ("in 7 minutes", later "2 minutes ago"), redrawn by each Discord client.
+ * Relative, so it carries no timezone; pair it with phTime for the clock time.
+ */
+export const countdown = (ms: number) => `<t:${Math.floor(ms / 1000)}:R>`;
+
+/**
  * Format an instant as PH time, e.g. "20:00 PHT". When `now` is given, prefix the
  * day relative to it: "Today 20:00 PHT", "Tomorrow 03:00 PHT", "Fri 20:00 PHT".
  */

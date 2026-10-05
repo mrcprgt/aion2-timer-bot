@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { phTime } from "../src/discord";
+import { countdown, phTime } from "../src/discord";
 import { EVENTS, nextOccurrences, occurrencesBetween } from "../src/schedule";
 
 // Server time is JP (UTC+9); display is PH (UTC+8). 2026-10-05 is a Monday.
@@ -66,5 +66,11 @@ describe("phTime", () => {
     expect(phTime(at("2026-10-05T12:00:00Z"), now)).toBe("Today 20:00 PHT");
     expect(phTime(at("2026-10-05T18:00:00Z"), now)).toBe("Tomorrow 02:00 PHT"); // daily reset
     expect(phTime(at("2026-10-09T12:00:00Z"), now)).toBe("Fri 20:00 PHT"); // Nahma
+  });
+});
+
+describe("countdown", () => {
+  it("emits a Discord relative timestamp in whole seconds", () => {
+    expect(countdown(at("2026-10-05T12:00:00Z"))).toBe("<t:1791201600:R>");
   });
 });

@@ -1,6 +1,6 @@
 import { verifyKey } from "discord-interactions";
 import { handleCommand, type Env, type GuildConfig, type Interaction } from "./commands";
-import { phTime, postMessage } from "./discord";
+import { countdown, phTime, postMessage } from "./discord";
 import { EVENTS, occurrencesBetween, type Occurrence } from "./schedule";
 
 const PING = 1;
@@ -44,7 +44,7 @@ export async function sendAlerts(scheduledTime: number, env: Env): Promise<void>
     if (due.length === 0) return [];
     return [
       postMessage(env.DISCORD_TOKEN, cfg.channel_id, {
-        content: alertText(due, minute, cfg.role_id),
+        content: alertText(due, cfg.role_id),
         allowed_mentions: { roles: cfg.role_id ? [cfg.role_id] : [] },
       }),
     ];
@@ -55,11 +55,9 @@ export async function sendAlerts(scheduledTime: number, env: Env): Promise<void>
   }
 }
 
-function alertText(due: Occurrence[], now: number, roleId: string | null): string {
-  const lines = due.map(({ event, start }) => {
-    const mins = Math.round((start - now) / MIN);
-    const when = mins <= 0 ? "now" : `in ${mins} min`;
-    return `${event.emoji} **${event.name}** — ${phTime(start)} (${when})`;
-  });
+function alertText(due: Occurrence[], roleId: string | null): string {
+  const lines = due.map(
+    ({ event, start }) => `${event.emoji} **${event.name}** — ${phTime(start)} · ${countdown(start)}`,
+  );
   return (roleId ? `<@&${roleId}>\n` : "") + lines.join("\n");
 }

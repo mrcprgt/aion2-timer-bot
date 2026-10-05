@@ -1,5 +1,5 @@
 import { EVENTS, nextOccurrences } from "./schedule";
-import { DISPLAY_TZ_LABEL, phTime } from "./discord";
+import { countdown, DISPLAY_TZ_LABEL, phTime } from "./discord";
 
 export interface Env {
   DB: D1Database;
@@ -92,8 +92,8 @@ export async function handleCommand(interaction: Interaction, env: Env): Promise
 function timers(now = Date.now()): Response {
   const lines = nextOccurrences(now).map(({ event, start, end }) =>
     start <= now && end > now
-      ? `${event.emoji} **${event.name}** — 🟢 open now, until ${phTime(end)}`
-      : `${event.emoji} **${event.name}** — ${phTime(start, now)}`,
+      ? `${event.emoji} **${event.name}** — 🟢 open now, until ${phTime(end)} · ${countdown(end)}`
+      : `${event.emoji} **${event.name}** — ${phTime(start, now)} · ${countdown(start)}`,
   );
   return {
     type: 4,
