@@ -106,6 +106,7 @@ function timers(now = Date.now()): Response {
           footer: { text: `All times in ${DISPLAY_TZ_LABEL} (UTC+8)` },
         },
       ],
+      flags: EPHEMERAL,
     },
   };
 }

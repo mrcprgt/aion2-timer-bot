@@ -6,7 +6,7 @@ It runs entirely on the [Cloudflare Workers](https://workers.cloudflare.com/) fr
 
 ## Features
 
-- **`/timers`** shows the next occurrence of every tracked event, e.g. `Today 20:00 PHT`, or `🟢 open now` while an event is running.
+- **`/timers`** shows the next occurrence of every tracked event, e.g. `Today 20:00 PHT · in 2 hours`, or `🟢 open now` while an event is running. Only the person who ran it sees the reply.
 - **`/alerts setup`** posts a message in a channel a set number of minutes before each event, and can ping a role.
 - **`/alerts status`** / **`/alerts off`** show or disable this server's alert settings.
 
