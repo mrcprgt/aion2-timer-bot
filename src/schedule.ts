@@ -96,14 +96,14 @@ export const EVENTS: GameEvent[] = [
     name: "Daily Reset",
     emoji: "🔄",
     durationMin: 0,
-    rule: { type: "daily", times: ["03:00"] },
+    rule: { type: "daily", times: ["16:00"] }, // 15:00 PHT
   },
   {
     id: "weekly-reset",
     name: "Weekly Reset",
     emoji: "📅",
     durationMin: 0,
-    rule: { type: "weekly", days: [WED], times: ["03:00"] },
+    rule: { type: "weekly", days: [WED], times: ["16:00"] }, // Wed 15:00 PHT
   },
 ];
 

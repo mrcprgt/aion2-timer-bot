@@ -33,8 +33,8 @@ It runs entirely on the [Cloudflare Workers](https://workers.cloudflare.com/) fr
 | 🏰 Artifact Siege | Mon, Thu, Sat 20:00 |
 | 👹 Executors (Tamasa · Argo · Kaira) | Mon, Thu, Sat 20:30 |
 | 🐉 Guardian Lord Nahma + Enraged Nahma | Fri, Sun 20:00 |
-| 🔄 Daily Reset | Daily 02:00 |
-| 📅 Weekly Reset | Wed 02:00 |
+| 🔄 Daily Reset | Daily 15:00 |
+| 📅 Weekly Reset | Wed 15:00 |
 
 Times come from the [gamers4.life event timer](https://gamers4.life/aion-2/database/en/events/) (Japan region). They're defined in Japan server time (UTC+9) in [`src/schedule.ts`](src/schedule.ts); edit that file to fix or add events.
 

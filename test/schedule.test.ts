@@ -26,10 +26,16 @@ describe("nextOccurrences", () => {
     expect(next("watcher-kaira", at("2026-10-05T12:31:00Z"))).toBe("2026-10-05T13:00:00.000Z"); // 22:00 JP
   });
 
+  it("puts daily reset at 15:00 PHT", () => {
+    // 15:00 PHT = 16:00 JP = 07:00 UTC
+    expect(next("daily-reset", at("2026-10-05T06:59:00Z"))).toBe("2026-10-05T07:00:00.000Z");
+    expect(next("daily-reset", at("2026-10-05T07:01:00Z"))).toBe("2026-10-06T07:00:00.000Z");
+  });
+
   it("wraps weekly events to the following week", () => {
-    // Weekly reset: Wed 03:00 JP = Tue 18:00 UTC
-    expect(next("weekly-reset", at("2026-10-06T17:59:00Z"))).toBe("2026-10-06T18:00:00.000Z");
-    expect(next("weekly-reset", at("2026-10-06T19:00:00Z"))).toBe("2026-10-13T18:00:00.000Z");
+    // Weekly reset: Wed 15:00 PHT = Wed 16:00 JP = Wed 07:00 UTC
+    expect(next("weekly-reset", at("2026-10-07T06:59:00Z"))).toBe("2026-10-07T07:00:00.000Z");
+    expect(next("weekly-reset", at("2026-10-07T07:01:00Z"))).toBe("2026-10-14T07:00:00.000Z");
     expect(next("nahma", at("2026-10-05T10:00:00Z"))).toBe("2026-10-09T12:00:00.000Z"); // Fri 21:00 JP
   });
 
@@ -64,7 +70,7 @@ describe("phTime", () => {
 
   it("labels the day relative to now in PH time", () => {
     expect(phTime(at("2026-10-05T12:00:00Z"), now)).toBe("Today 20:00 PHT");
-    expect(phTime(at("2026-10-05T18:00:00Z"), now)).toBe("Tomorrow 02:00 PHT"); // daily reset
+    expect(phTime(at("2026-10-05T18:00:00Z"), now)).toBe("Tomorrow 02:00 PHT");
     expect(phTime(at("2026-10-09T12:00:00Z"), now)).toBe("Fri 20:00 PHT"); // Nahma
   });
 });
